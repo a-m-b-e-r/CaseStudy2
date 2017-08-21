@@ -1,0 +1,112 @@
+---
+title: "Case Study 2"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Set working directory here
+setwd("C:/Users/amber.whelpley/Google Drive/MSDS/6306 Doing Data Science")
+
+# these libraries are needed to run this analysis; code for installing the packages is included as well
+
+#install.packages("ggplot2")
+library(ggplot2)
+
+#install.packages("lubridate")
+library(lubridate)
+```
+
+## Introduction
+
+Group B performed two analyses on the growth of orange trees and temperature based on different countries/cities. The orange tree analysis used the built-in data set called "Orange" in R while the temperature analysis used two data sets from box.com called "Temp" and "CityTemp". The different forms of comparisons and explorations are listed below based on the analysis.  
+
+## Orange Tree data 
+
+The orange tree dataset is a built-in R dataset about the growth of orange trees. The Orange dataset called three variables: Tree (Ordered factor: 1:5), age (Numeric) and circumference (numeric). The trees were sorted per increasing maximum diameter. The age is given in the number of days since 1968/12/31. The circumferences (MM)  are based on the tree's circumference at breast height. The statistical calculations and visualizations were created based of the variables listed above. Refer to the bullet points below for the types of calculations and visualizations performed and the conclusion for our findings. 
+
+-	Mean of the trunk circumferences for different size of the tree
+-	Median of the trunk circumferences for different size of the tree
+-	Scatter plot of the trunk circumferences against the age of the tree
+-	Box plot of the trunk circumferences 
+
+
+```{r, tidy=TRUE}
+
+# This file will download the data and store it as data frame variables.
+source("sources/AnalyzeOrangeTreeData.R",echo=TRUE,keep.source = TRUE)
+```
+
+## Plotting Orange Tree Data
+
+We use a scatterplot and a comparative boxplot to view this data.
+
+```{r, tidy=TRUE}
+
+# This file will plot the information from the orange tree data analysis.
+source("sources/PlotOrangeTreeData.R",echo=TRUE,keep.source = TRUE)
+```
+
+## Temperature Data
+
+The "Temp" dataset had the following variables: Date(Date), Monthly AverageTemp (Numeric), Monthly AverageTemp Uncertainity (Numeric), and Country (Character). The other dataset, "CityTemp", had the following variables: Date (Data), Monthly AverageTemp (Numeric), Monthly AverageTemp Uncertainity (Numeric), City (Character), Country (Character), Latitude (Character), and Longitude (Character). The statistical calculations and visualizations were created based of the variables listed above. Refer to the bullet points below for the types of calculations and visualizations performed and the conclusion for our findings. 
+
+### First we need to clean the two datasets.
+
+```{r, tidy=TRUE}
+# This file will subset the data and clean it up.
+source("sources/CleanTempDatasets.R",echo=TRUE,keep.source = TRUE)
+```
+
+### Temp:
+
+- Difference: Between the maximum and minimum monthly average temperatures for each country    
+- Visualize top 20 countries with the maximum differences for the period since 1900     
+- Subset of data, "UStemp", where US land temperatures from 01/01/1900      
+    - Created a new column in Fahrenheit (°F) of monthly average land temperatures       
+    - Calculated the average land temperature by year     
+    - Calculated the one year difference of average land temperature by year and maximum difference (value) with corresponding two years     
+
+```{r, tidy=TRUE}
+# This file will subset the Temp dataset for analysis.
+source("sources/SubsetTempData.R",echo=TRUE,keep.source = TRUE)
+```
+
+## Plot of the Temp data
+
+We use a bar chart and line plot to analyze the differences in temperature for various countries.  
+
+```{r, tidy=TRUE}
+# This file will analyze and plot the data.
+source("sources/AnalyzeTempData.R",echo=TRUE,keep.source = TRUE)
+```
+
+### CityTemp: 
+-	Difference: Between the maximum and minimum temperature for each major city 
+-	Visualize the top cities with maximum difference for the period since 1900 
+
+```{r, tidy=TRUE}
+# This file will subset the CityTemp dataset for analysis.
+source("sources/SubsetCityTempData.R",echo=TRUE,keep.source = TRUE)
+```
+
+## Plot of the CityTemp data
+
+We use a bar chart to analyze the differences in temperature for various cities.  
+
+```{r, tidy=TRUE}
+# This file will analyze and plot the data.
+source("sources/AnalyzeCityTempData.R",echo=TRUE,keep.source = TRUE)
+```
+
+
+## Conclusion
+
+### Orange Trees:
+
+There seems to be a positive relationship between a tree trunk circumference vs. age. For our analysis, group 4 had the highest mean and median of circumference while group 3 had the lowest.  We expect there to be a correlation between a tree's circumference and its age. Refer to the key points and plots/graphs for additional explanation. 
+
+### Temperature
+
+For the Top 20 Countries, Kazakhstan had the largest differences (49.163) while Armenia had the smallest difference (35.273). For the Top 20 Major Cities, Harbin had the largest differences (53.281) while Jinan had the smallest difference (33.778). The top and bottom major cities and larger and smaller differences compared to the top 20 countries' differences. For the highest and lowest average US land temperature year, it occurred in 2013 (52.33°F) and 1996 (47.76°F). Refer to the key points and plots/graphs for additional explanation.
